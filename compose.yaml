@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: docker/api/Dockerfile
+    ports:
+      - "8080:8080"
+  front:
+    build:
+      context: .
+      dockerfile: docker/front/Dockerfile
+    ports:
+      - "5173:5173"
+  buf-go:
+    build:
+      context: .
+      dockerfile: docker/buf/go/Dockerfile
+    working_dir: /usr/src/chat-example
+    volumes:
+      - ./:/usr/src/chat-example
+  buf-ts:
+    build:
+      context: .
+      dockerfile: docker/buf/ts/Dockerfile
+    working_dir: /usr/src/chat-example
+    volumes:
+      - ./:/usr/src/chat-example

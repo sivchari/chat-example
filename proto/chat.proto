@@ -1,0 +1,81 @@
+syntax = "proto3";
+package api;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/sivchari/chat-example/proto";
+
+service ChatService {
+  rpc CreateRoom(CreateRoomRequest) returns (CreateRoomResponse) {}
+  rpc GetRoom(GetRoomRequest) returns (GetRoomResponse) {}
+  rpc ListRoom(google.protobuf.Empty) returns (ListRoomResponse) {}
+  rpc GetPass(google.protobuf.Empty) returns (GetPassResponse) {}
+  rpc JoinRoom(JoinRoomRequest) returns (stream JoinRoomResponse) {}
+  rpc LeaveRoom(LeaveRoomRequest) returns (google.protobuf.Empty) {}
+  rpc ListMessage(ListMessageRequest) returns (ListMessageResponse) {}
+  rpc Chat(ChatRequest) returns (ChatResponse) {}
+}
+
+message CreateRoomRequest {
+  string name = 1;
+}
+
+message CreateRoomResponse {
+  string id = 1;
+}
+
+message GetRoomRequest {
+  string id = 1;
+}
+
+message GetRoomResponse {
+  Room room = 1;
+}
+
+message ListRoomResponse {
+  repeated Room rooms = 1;
+}
+
+message Room {
+  string id = 1;
+  string name = 2;
+}
+
+message Message {
+  string roomId = 1;
+  string text = 2;
+}
+
+message ListMessageRequest {
+  string roomId = 1;
+}
+
+message ListMessageResponse {
+  repeated Message messages = 1;
+}
+
+message ChatRequest {
+  Message message = 1;
+}
+
+message ChatResponse {
+  Message message = 1;
+}
+
+message JoinRoomRequest {
+  string roomId = 1;
+  string pass = 2;
+}
+
+message JoinRoomResponse {
+  Message message = 1;
+}
+
+message LeaveRoomRequest {
+  string roomId = 1;
+  string pass = 2;
+}
+
+message GetPassResponse {
+  string pass = 1;
+}

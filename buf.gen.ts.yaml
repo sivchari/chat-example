@@ -1,0 +1,12 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/sivchari/chat-example/proto
+plugins:
+  - name: es
+    out: ./front/src/proto
+    opt: target=ts
+  - name: connect-web
+    out: ./front/src/proto
+    opt: target=ts
